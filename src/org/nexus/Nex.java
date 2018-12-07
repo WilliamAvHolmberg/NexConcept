@@ -38,7 +38,7 @@ public class Nex extends Script {
 	// threshold for which items from bank that should be sold
 	public static int item_theshold = 500;
 	// threshold for when player should mule. If bank value exceeds the threshold.
-	public static int mule_threshold = 100000;
+	public static int mule_threshold = 30000;
 	public static long SLEEP_UNTIL = 0;
 	GearHandler gearHandler;
 	DepositItemHandler depositItemHandler;
