@@ -11,6 +11,7 @@ import org.nexus.communication.message.NexMessage;
 import org.nexus.handler.TaskHandler;
 import org.nexus.node.mule.PrepareForMuleDeposit;
 import org.nexus.task.mule.DepositToPlayerTask;
+import org.nexus.task.mule.Mule;
 import org.nexus.task.mule.PrepareForMuleDepositTask;
 import org.nexus.task.mule.WithdrawFromPlayerTask;
 import org.nexus.utils.Sleep;
@@ -24,7 +25,9 @@ public class MuleRequest extends NexRequest {
 
 	@Override
 	public void execute(PrintWriter out, BufferedReader in) throws IOException {
-		methodProvider.log("new mule requestelele");
+		if (Nex.CURRENT_TASK != null && !(Nex.CURRENT_TASK instanceof WithdrawFromPlayerTask)&& !(Nex.CURRENT_TASK instanceof DepositToPlayerTask)) {
+
+			methodProvider.log("new mule requestelele");
 		String[] nextRequest = respond.split(":");
 		String muleType = nextRequest[0].toLowerCase();
 		String itemID = nextRequest[1];
@@ -36,16 +39,16 @@ public class MuleRequest extends NexRequest {
 		String[] parsedRespond = respond.split(":");
 		if (parsedRespond[0].equals("SUCCESSFUL_MULE_REQUEST")) {
 			handleSuccessfullMuleRespond(parsedRespond, Integer.parseInt(itemID), Integer.parseInt(amount));
-		} else if (parsedRespond[0].equals("MULE_BUSY")){
+		} else if (parsedRespond[0].equals("MULE_BUSY")) {
 			methodProvider.log("mule is busy atm. lets sleep for 15sec and see if available");
-			Nex.CURRENT_TASK = new PrepareForMuleDepositTask();
-			Nex.CURRENT_TASK.exchangeContext(methodProvider.getBot());
 			Sleep.sleep(15000);
-		}else {
+		} else {
 			methodProvider.log("no mule available");
 			messageQueue.add(new DisconnectMessage(methodProvider, messageQueue, null));
 		}
 		methodProvider.log("helelulu??");
+		}
+
 	}
 
 	private void handleSuccessfullMuleRespond(String[] parsedRespond, int itemID, int amount) {
@@ -70,7 +73,10 @@ public class MuleRequest extends NexRequest {
 			newTask.setBreakAfterTime(5);
 			break;
 		}
-		if(newTask != null) {
+		if (newTask != null && (Nex.CURRENT_TASK instanceof PrepareForMuleDepositTask)) {
+			Nex.CURRENT_TASK = null;
+			TaskHandler.addPrioritizedTask(newTask);
+		}else {
 			TaskHandler.addPrioritizedTask(newTask);
 		}
 

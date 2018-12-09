@@ -3,6 +3,7 @@ package org.nexus;
 import java.awt.Graphics2D;
 
 import org.nexus.communication.NexHelper;
+import org.nexus.communication.message.NexMessage;
 import org.nexus.event.login.LoginEvent;
 import org.nexus.handler.TaskHandler;
 import org.nexus.handler.bank.BankHandler;
@@ -144,7 +145,7 @@ public class Nex extends Script {
 	@Override
 	public void onPaint(Graphics2D g) {
 		if (CURRENT_TASK != null) {
-			// g.drawString(CURRENT_TASK.getLog(), 10, 10 );
+			g.drawString(CURRENT_TASK.getClass().getSimpleName(), 10, 10 );
 			CURRENT_TASK.onPaint(g);
 		}
 		if (SLEEP_UNTIL > System.currentTimeMillis()) {
@@ -154,6 +155,16 @@ public class Nex extends Script {
 
 		g.drawString("Next Mule check: " + CheckIfWeShallSellItems.getTimeTilNextCheckInMinutes(), 10, 60);
 		g.drawString("Last server log: " + helper.secondsSinceLastLog(), 10, 85);
+		int x = 250;
+		for(NexMessage mess: NexHelper.getQueue()) {
+			g.drawString(mess.getClass().getSimpleName(), 10,x);
+			x+= 25;
+		}
+		
+		for(Task task: TaskHandler.available_tasks) {
+			g.drawString(task.getClass().getSimpleName(), 10,x);
+			x+= 25;
+		}
 	}
 
 	@Override

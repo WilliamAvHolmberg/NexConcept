@@ -37,7 +37,7 @@ public class WithdrawFromPlayerTask extends Mule {
 			log("lets hop");
 			getWorlds().hop(world);
 			Sleep.sleepUntil(() ->getWorlds().getCurrentWorld() == world, 15000);
-			Sleep.sleep(5000);
+			Sleep.sleep(10000);
 		}
 		else if (getMule(getTradeName()) != null) {
 			log("Mule is available within a distance of:"

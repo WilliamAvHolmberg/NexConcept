@@ -38,7 +38,7 @@ public class DepositToPlayerTask extends Mule {
 			log("lets hop");
 			getWorlds().hop(world);
 			Sleep.sleepUntil(() ->getWorlds().getCurrentWorld() == world, 15000);
-			Sleep.sleep(5000);
+			Sleep.sleep(10000);
 		}
 		else if (!WebBank.GRAND_EXCHANGE.getArea().contains(myPlayer())) {
 			walking.webWalk(WebBank.GRAND_EXCHANGE.getArea());
