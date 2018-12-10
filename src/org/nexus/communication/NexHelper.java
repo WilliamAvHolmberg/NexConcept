@@ -103,6 +103,7 @@ public class NexHelper extends MethodProvider implements Runnable {
 
 	private void whileShouldRun(PrintWriter out, BufferedReader in) throws IOException, InterruptedException {
 		while (Nex.SHOULD_RUN) {
+			log("Hello??");
 			logToServer(out, in);
 			checkIfBanned(out, in);
 			if (!messageQueue.isEmpty()) {

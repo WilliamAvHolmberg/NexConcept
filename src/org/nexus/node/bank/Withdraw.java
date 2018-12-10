@@ -53,8 +53,8 @@ public class Withdraw extends Node {
 
 	private void handleBankDoesNotContainItem(WithdrawItem item, int amountRequiredFromGE) {
 		if (item.getItemID() == 995) {
-			if(amountRequiredFromGE < 10000) {
-				amountRequiredFromGE = 10000;
+			if(amountRequiredFromGE < 20000) {
+				amountRequiredFromGE = 20000;
 			}
 			NexHelper.pushMessage(new MuleRequest(this,NexHelper.getQueue(), "MULE_WITHDRAW:995:" + amountRequiredFromGE));
 			log("sleep until we got new task");

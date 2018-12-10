@@ -2,6 +2,10 @@ package org.nexus.task.mule;
 
 import java.awt.Graphics2D;
 
+import org.nexus.Nex;
+import org.nexus.communication.NexHelper;
+import org.nexus.communication.message.CustomLog;
+import org.nexus.communication.message.NexMessage;
 import org.nexus.handler.bank.WithdrawItemHandler;
 import org.nexus.node.mule.DepositItemToPlayer;
 import org.nexus.node.mule.WithdrawItemFromPlayer;
@@ -56,6 +60,17 @@ public class DepositToPlayerTask extends Mule {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public void removeTask() {
+		// TODO send mule done with info
+	
+		Nex.CURRENT_TASK = null;
+		String respond = "mule_log:" + myPlayer().getName() + ":" + getItemAmount() + ":" + tradeName;
+		log("removing task and sending message." + respond);
+		NexHelper.pushMessage(new CustomLog(this, NexHelper.getQueue(), respond));
+	}
+	
 
 	@Override
 	public TaskType getTaskType() {

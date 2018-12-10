@@ -19,7 +19,8 @@ public class TaskHandler {
 	public static void addPrioritizedTask(Task task) {
 		Task currentTask;
 		if(Nex.CURRENT_TASK != null) {
-			currentTask = Nex.CURRENT_TASK;	
+			currentTask = Nex.CURRENT_TASK;
+			
 			available_tasks.push(currentTask);
 			Nex.CURRENT_TASK = null;
 		}

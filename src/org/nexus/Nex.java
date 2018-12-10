@@ -81,7 +81,7 @@ public class Nex extends Script {
 	@Override
 	public int onLoop() throws InterruptedException {
 		log("looop");
-		if (helper.secondsSinceLastLog() > 60) {
+		if (helper.secondsSinceLastLog() > 420) {
 			log("we have to break because we are not connected to serv.");
 			System.exit(1);
 		}
