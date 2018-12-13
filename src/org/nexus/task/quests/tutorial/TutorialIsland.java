@@ -120,7 +120,7 @@ public final class TutorialIsland extends Task {
 
 	@Override
 	public void onPaint(Graphics2D g) {
-		//TODO - Show current stage, run time etc
+		//g.draw("Section:" + getTutorialSection());
 		
 	}
 

@@ -48,6 +48,7 @@ public class Nex extends Script {
 	BuyItemHandler buyItemHandler;
 	public static ExperienceTracker experienceTracker;
 	NexHelper helper;
+	public static String ingameUsername = "";
 
 	@Override
 	public void onStart() throws InterruptedException {

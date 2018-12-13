@@ -1,6 +1,7 @@
 package org.nexus.task.quests.tutorial.sections;
 
 
+import org.nexus.Nex;
 import org.nexus.task.quests.events.DisableAudioEvent;
 import org.nexus.task.quests.events.EnableFixedModeEvent;
 import org.nexus.task.quests.events.ToggleRoofsHiddenEvent;
@@ -40,21 +41,27 @@ public final class RuneScapeGuideSection extends TutorialSection {
             selectContinue();
             return;
         }
-
+        log(Nex.ingameUsername);
+        log(getProgress());
         switch (getProgress()) {
             case 0:
             case 1:
             case 2:
-                if (isCreationScreenVisible()) {
+            	if (getConfigs().get(1042) != 21) {
+                	log("hello?");
+                    setDisplayName();
+                    sleep(4000);
+                }else if (isCreationScreenVisible()) {
+                	log("createscree");
                     createRandomCharacter();
                 } else if (experienceWidget.get(getWidgets()).isPresent()) {
+                	
                     if (getDialogues().selectOption(random(1, 3))) {
                         Sleep.sleepUntil(() -> !experienceWidget.get(getWidgets()).map(widget -> !widget.isVisible()).orElse(true), 2000, 600);
                     }
-                } else if(!experienceWidget.get(getWidgets()).isPresent()) {
+                }else if(!experienceWidget.get(getWidgets()).isPresent()) {
+                	log("experience wid0");
                     talkToInstructor();
-                }else if (getConfigs().get(1042) != 21) {
-                    setDisplayName();
                 }
                 break;
             case 3:
@@ -196,7 +203,7 @@ public final class RuneScapeGuideSection extends TutorialSection {
     }
     
 	public String getUsername() {
-		return getClient().getUsername().split("@")[0].replaceAll("+", "");
+		return Nex.ingameUsername;
 	}
 	
 	

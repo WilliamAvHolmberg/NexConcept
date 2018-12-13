@@ -40,7 +40,7 @@ public class NexHelper extends MethodProvider implements Runnable {
 	private String respond = "none";
 
 	private NexMessage nextRequest;
-	private String username;
+	private String mail;
 	private String password;
 	private String log;
 	private String name;
@@ -64,7 +64,7 @@ public class NexHelper extends MethodProvider implements Runnable {
 		
 	}
 	public NexHelper(String username, String password, Task currentTask) {
-		this.username = username;
+		this.mail = username;
 		this.password = password;
 		this.name = username.split("@")[0];
 		messageQueue = new Stack<NexMessage>();
@@ -131,10 +131,13 @@ public class NexHelper extends MethodProvider implements Runnable {
 	 */
 	private void initializeContactToSocket(PrintWriter out, BufferedReader in) throws IOException {
 		log("bla");
-		out.println("script:1:" + getIP() + ":" + username + ":" + password + ":"
+		out.println("script:1:" + getIP() + ":" + mail + ":" + password + ":"
 				+ getName() + ":" + worlds.getCurrentWorld());
 		respond = in.readLine();
-		if (respond.equals("connected:1")) {
+		if (respond.contains("connected:1")) {
+			if(respond.split(":")[2] != null) {
+				Nex.ingameUsername = respond.split(":")[2];
+			}
 			log("NexHelper has been initialized towards Nexus");
 		} else {
 			log("Connection Towards Nexus failed");
