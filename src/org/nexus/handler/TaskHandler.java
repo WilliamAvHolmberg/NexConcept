@@ -18,11 +18,11 @@ public class TaskHandler {
 	 */
 	public static void addPrioritizedTask(Task task) {
 		Task currentTask;
-		if(Nex.CURRENT_TASK != null) {
-			currentTask = Nex.CURRENT_TASK;
+		if(TaskHandler.getCurrentTask() != null) {
+			currentTask = TaskHandler.getCurrentTask();
 			
 			available_tasks.push(currentTask);
-			Nex.CURRENT_TASK = null;
+			TaskHandler.getCurrentTask() = null;
 		}
 		available_tasks.push(task);
 	}
@@ -31,7 +31,7 @@ public class TaskHandler {
 	 * Adds a task to the top of the list. If currenttask is not null, remove currenttask and add it to the list
 	 */
 	public static void addTaskAndResetStack(Task task) {
-		Nex.CURRENT_TASK = null;
+		TaskHandler.getCurrentTask() = null;
 		available_tasks.removeAllElements();
 		available_tasks.add(task);
 	}

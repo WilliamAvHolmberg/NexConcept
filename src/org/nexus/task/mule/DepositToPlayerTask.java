@@ -65,7 +65,7 @@ public class DepositToPlayerTask extends Mule {
 	public void removeTask() {
 		// TODO send mule done with info
 	
-		Nex.CURRENT_TASK = null;
+		TaskHandler.getCurrentTask() = null;
 		String respond = "mule_log:" + myPlayer().getName() + ":" + getItemAmount() + ":" + tradeName;
 		log("removing task and sending message." + respond);
 		NexHelper.pushMessage(new CustomLog(this, NexHelper.getQueue(), respond));

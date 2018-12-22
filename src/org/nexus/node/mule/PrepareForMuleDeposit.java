@@ -23,7 +23,7 @@ public class PrepareForMuleDeposit extends Node {
 			hasWithdrawnMoney = false;
 			NexHelper.pushMessage(new MuleRequest(this, NexHelper.getQueue(),
 					"MULE_DEPOSIT:995:" + inventory.getAmount(995)));
-			Sleep.sleepUntil(() -> Nex.CURRENT_TASK != null && Nex.CURRENT_TASK.getTaskType() == TaskType.DEPOSIT_ITEM_TO_PLAYER, 20000);
+			Sleep.sleepUntil(() -> TaskHandler.getCurrentTask() != null && TaskHandler.getCurrentTask().getTaskType() == TaskType.DEPOSIT_ITEM_TO_PLAYER, 20000);
 			
 		}
 		return 200;

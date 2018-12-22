@@ -28,8 +28,8 @@ public abstract class Handler extends MethodProvider {
 	public abstract int onLoop();
 
 	public ActionTask getCurrentTask() {
-		if (Nex.CURRENT_TASK instanceof ActionTask) {
-			return (ActionTask) Nex.CURRENT_TASK;
+		if (TaskHandler.getCurrentTask() instanceof ActionTask) {
+			return (ActionTask) TaskHandler.getCurrentTask();
 		}
 		return null;
 	}

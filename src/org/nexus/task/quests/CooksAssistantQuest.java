@@ -83,7 +83,7 @@ public class CooksAssistantQuest extends QuestTask {
 	@Override
 	public void removeTask() {
 		// TODO queue tutorial island is done. Add RunTime
-		Nex.CURRENT_TASK = null;
+		TaskHandler.getCurrentTask() = null;
 
 	}
 

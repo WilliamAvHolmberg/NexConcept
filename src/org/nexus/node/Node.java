@@ -10,7 +10,7 @@ public abstract class Node extends MethodProvider {
 	public abstract String toString(); //Node name - eg: CutTree
 	
 	public Task getCurrentTask() {
-		return Nex.CURRENT_TASK;
+		return TaskHandler.getCurrentTask();
 	}
 	
 

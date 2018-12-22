@@ -60,7 +60,6 @@ public final class RuneScapeGuideSection extends TutorialSection {
                         Sleep.sleepUntil(() -> !experienceWidget.get(getWidgets()).map(widget -> !widget.isVisible()).orElse(true), 2000, 600);
                     }
                 }else if(!experienceWidget.get(getWidgets()).isPresent()) {
-                	log("experience wid0");
                     talkToInstructor();
                 }
                 break;

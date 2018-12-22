@@ -53,6 +53,6 @@ public class WoodcuttingRespond extends TaskRespond {
 		newTask = new WoodcuttingTask(actionArea, bankArea, axe, treeName);
 		newTask.setTaskID(currentTaskID);
 		setBreakConditions(newTask, parsedBreakCondition, breakAfter, parsedLevelGoal);
-		Nex.CURRENT_TASK = (newTask);
+		TaskHandler.getCurrentTask() = (newTask);
 	}
 }

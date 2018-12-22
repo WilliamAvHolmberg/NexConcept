@@ -72,7 +72,7 @@ public class NexHelper extends MethodProvider implements Runnable {
 
 	@Override
 	public void run() {
-		log("started NexHelper");
+		log("started NexHelper 2.0 with selenium support");
 		try {
 			Socket socket = new Socket(ip, port);
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -103,7 +103,6 @@ public class NexHelper extends MethodProvider implements Runnable {
 
 	private void whileShouldRun(PrintWriter out, BufferedReader in) throws IOException, InterruptedException {
 		while (Nex.SHOULD_RUN) {
-			log("Hello??");
 			logToServer(out, in);
 			checkIfBanned(out, in);
 			if (!messageQueue.isEmpty()) {
@@ -161,10 +160,10 @@ public class NexHelper extends MethodProvider implements Runnable {
 		 * position not null, += position coordinates
 		 */
 
-		if (Nex.CURRENT_TASK == null || Nex.CURRENT_TASK.getLog() == null) {
+		if (TaskHandler.getCurrentTask() == null || TaskHandler.getCurrentTask().getLog() == null) {
 			return "log:0";
 		}
-		String respond = "task_log:1:" + Nex.CURRENT_TASK.getLog();
+		String respond = "task_log:1:" + TaskHandler.getCurrentTask().getLog();
 		return respond;
 	}
 

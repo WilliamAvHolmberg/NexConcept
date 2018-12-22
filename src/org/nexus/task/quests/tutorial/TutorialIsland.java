@@ -134,7 +134,7 @@ public final class TutorialIsland extends Task {
 	@Override
 	public void removeTask() {
 		//TODO queue tutorial island is done. Add RunTime
-		Nex.CURRENT_TASK = null;
+		TaskHandler.getCurrentTask() = null;
 		
 	}
 

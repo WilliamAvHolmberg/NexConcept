@@ -13,6 +13,7 @@ public class LoginListener implements LoginResponseCodeListener {
 
 	@Override
 	public void onResponseCode(int response) throws InterruptedException {
+		context.log("respone code: " + response);
 		if (response == ResponseCode.ACCOUNT_DISABLED) {
 			context.log("BANNED");
 		}

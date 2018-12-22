@@ -131,7 +131,7 @@ public abstract class Mule extends Task{
 	@Override
 	public void removeTask() {
 		// TODO send mule done with info
-		Nex.CURRENT_TASK = null;
+		TaskHandler.getCurrentTask() = null;
 	}
 	
 	@Override

@@ -25,7 +25,7 @@ public class MuleRequest extends NexRequest {
 
 	@Override
 	public void execute(PrintWriter out, BufferedReader in) throws IOException {
-		if (Nex.CURRENT_TASK != null && !(Nex.CURRENT_TASK instanceof WithdrawFromPlayerTask)&& !(Nex.CURRENT_TASK instanceof DepositToPlayerTask)) {
+		if (TaskHandler.getCurrentTask() != null && !(TaskHandler.getCurrentTask() instanceof WithdrawFromPlayerTask)&& !(TaskHandler.getCurrentTask() instanceof DepositToPlayerTask)) {
 
 			methodProvider.log("new mule requestelele");
 		String[] nextRequest = respond.split(":");
@@ -73,8 +73,8 @@ public class MuleRequest extends NexRequest {
 			newTask.setBreakAfterTime(5);
 			break;
 		}
-		if (newTask != null && (Nex.CURRENT_TASK instanceof PrepareForMuleDepositTask)) {
-			Nex.CURRENT_TASK = null;
+		if (newTask != null && (TaskHandler.getCurrentTask() instanceof PrepareForMuleDepositTask)) {
+			TaskHandler.getCurrentTask() = null;
 			TaskHandler.addPrioritizedTask(newTask);
 		}else {
 			TaskHandler.addPrioritizedTask(newTask);

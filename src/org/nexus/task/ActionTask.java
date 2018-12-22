@@ -86,7 +86,7 @@ public abstract class ActionTask extends Task{
 	@Override
 	public void removeTask() {
 		// TODO send TASK_COMPLETED to server
-		Nex.CURRENT_TASK = null;
+		TaskHandler.getCurrentTask() = null;
 	}
 
 }

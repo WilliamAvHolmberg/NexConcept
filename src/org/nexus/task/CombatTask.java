@@ -27,6 +27,14 @@ public class CombatTask extends ActionTask {
 		//NexusScript.setTracker(getSkill());
 		//LootHandler.reset();
 	}
+	
+	@Override
+	public int onLoop() throws InterruptedException {
+		if(AttackStyleAction.)
+		return 0;
+	}
+	
+	
 
 
 
@@ -80,11 +88,7 @@ public class CombatTask extends ActionTask {
 
 
 
-	@Override
-	public int onLoop() throws InterruptedException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 
 

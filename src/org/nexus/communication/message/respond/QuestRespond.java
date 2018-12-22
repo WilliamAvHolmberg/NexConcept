@@ -50,7 +50,7 @@ public class QuestRespond extends TaskRespond {
 		if (newTask != null) {
 			newTask.setTaskID(currentTaskID);
 
-			Nex.CURRENT_TASK = (newTask);
+			TaskHandler.getCurrentTask() = (newTask);
 		}
 	}
 }

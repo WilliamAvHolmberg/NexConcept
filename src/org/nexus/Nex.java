@@ -28,11 +28,13 @@ import org.osbot.rs07.api.Quests.Quest;
 import org.osbot.rs07.api.ui.Message;
 import org.osbot.rs07.api.ui.Message.MessageType;
 import org.osbot.rs07.api.util.ExperienceTracker;
+import org.osbot.rs07.constants.ResponseCode;
+import org.osbot.rs07.listener.LoginResponseCodeListener;
 import org.osbot.rs07.script.Script;
 import org.osbot.rs07.script.ScriptManifest;
 
 @ScriptManifest(author = "", info = "", logo = "", name = "NEX", version = 0)
-public class Nex extends Script {
+public class Nex extends Script implements LoginResponseCodeListener{
 
 	public static boolean SHOULD_RUN = true;
 	public static Task CURRENT_TASK;
@@ -81,7 +83,6 @@ public class Nex extends Script {
 
 	@Override
 	public int onLoop() throws InterruptedException {
-		log("looop");
 		if (helper.secondsSinceLastLog() > 420) {
 			log("we have to break because we are not connected to serv.");
 			System.exit(1);
@@ -121,7 +122,7 @@ public class Nex extends Script {
 			CURRENT_TASK = new TutorialIsland();
 		} else {
 			helper.getNewTask();
-			Sleep.sleepUntil(() -> Nex.CURRENT_TASK != null || !TaskHandler.available_tasks.isEmpty(), 30000);
+			Sleep.sleepUntil(() -> TaskHandler.getCurrentTask() != null || !TaskHandler.available_tasks.isEmpty(), 30000);
 		}
 		if (CURRENT_TASK != null) {
 			CURRENT_TASK.exchangeContext(bot);
@@ -183,6 +184,19 @@ public class Nex extends Script {
 
 		if (message.getMessage().contains("logs.") && CURRENT_TASK.getTaskType() == TaskType.WOODCUTTING) {
 			LootHandler.addLoot(((WoodcuttingTask) CURRENT_TASK).getTreeLog());
+		}
+
+	}
+	
+	@Override
+	public void onResponseCode(int response) throws InterruptedException {
+		log("respone code: " + response);
+		if(response == 5) {
+			log("already logged in");
+			System.exit(1);
+		}
+		if (response == ResponseCode.ACCOUNT_DISABLED) {
+			log("BANNED");
 		}
 
 	}
